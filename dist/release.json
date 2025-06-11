@@ -1,5 +1,0 @@
-{
-  "latestTag": "v0.1.90",
-  "changelog": "\n\n## [vv0.1.90](releases/tag/vv0.1.90) - 2025-06-10\n<!-- bump-type:patch -->\n### New Features\n\n- Custom chat ping functionality!!! To ping on any server type @ and on other web client such ping will be highlighted. Can be disabled. [`6a583d2`](/commit/6a583d2a363f04793265cc5afa1a766f2fd20724)\n- Simple but effective renderer perf debug features ([#347](/issues/347))\n- configurable mobile top buttons! ([#361](/issues/361))\n### Bug Fixes\n\n- **important**: make chat word breaking match Minecraftt behavior [`e982bf1`](/commit/e982bf1493207575e2e077a4843188083c10b794)\n- **regression**: B on gamepad was opening pause menu instead of start (default actions map conflict). Now start if clicked again closes all modals [`38a1d83`](/commit/38a1d83cf284bf49d9eda0ed91c5bb62f35eded7)",
-  "previousTag": "v0.1.89"
-}
