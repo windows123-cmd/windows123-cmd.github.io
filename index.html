@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Recomendación</title>
+    <title>Mi Recomendación Especial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             margin: 0;
             padding: 20px;
             display: flex;
@@ -15,21 +22,61 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            text-align: center;
+            color: #333;
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
+            width: 100%;
             background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff8a00, #e52e71, #5e17eb);
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            position: relative;
         }
         
         h1 {
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 2.2em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            margin: 30px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .video-wrapper:hover {
+            transform: scale(1.01);
         }
         
         .video-container {
@@ -37,7 +84,6 @@
             overflow: hidden;
             width: 100%;
             padding-top: 56.25%; /* Relación de aspecto 16:9 */
-            margin-bottom: 20px;
         }
         
         .video-container iframe {
@@ -50,26 +96,170 @@
             border-radius: 8px;
         }
         
-        .description {
-            color: #666;
-            margin-top: 20px;
-            font-style: italic;
+        .video-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 25px;
+            text-align: left;
+            border-left: 4px solid #5e17eb;
+        }
+        
+        .video-info h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .video-info p {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tag {
+            background: #eef4ff;
+            color: #3498db;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            background: #5e17eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #4c12c0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(94, 23, 235, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer {
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Esta es mi recomendación:</h1>
-        
-        <div class="video-container">
-            <iframe 
-                src="https://www.youtube.com/embed/kj4LxVhx2-A?start=4" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
+        <div class="header">
+            <h1>Esta es mi recomendación</h1>
+            <p class="subtitle">Un video que realmente vale la pena ver</p>
         </div>
         
-        <p class="description">Video recomendado: "El video mas largo de youtube"</p>
+        <div class="video-wrapper">
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/kj4LxVhx2-A?start=4" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+        
+        <div class="video-info">
+            <h3><i class="fas fa-info-circle"></i> Acerca de este video</h3>
+            <p>Este es el video más largo de YouTube, una verdadera maravilla de la perseverancia y dedicación. Con una duración extraordinaria, representa un logro único en la plataforma.</p>
+            
+            <div class="tags">
+                <span class="tag"><i class="fas fa-clock"></i> Larga duración</span>
+                <span class="tag"><i class="fas fa-trophy"></i> Récord</span>
+                <span class="tag"><i class="fas fa-youtube"></i> YouTube</span>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button class="btn" onclick="alert('¡Gracias por tu like! 😊')">
+                <i class="fas fa-thumbs-up"></i> Me gusta esta recomendación
+            </button>
+            <a href="https://youtube.com" class="btn btn-secondary" target="_blank">
+                <i class="fab fa-youtube"></i> Ver más videos
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p>Recomendado el 19 de septiembre de 2025 • ¡Disfruta del contenido!</p>
+        </div>
     </div>
+
+    <script>
+        // Efecto de escritura gradual del título
+        document.addEventListener('DOMContentLoaded', function() {
+            const title = document.querySelector('h1');
+            const originalText = title.textContent;
+            title.textContent = '';
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < originalText.length) {
+                    title.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            
+            setTimeout(typeWriter, 500);
+        });
+    </script>
 </body>
 </html>
