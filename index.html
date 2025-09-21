@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Recomendación Especial</title>
+    <title>Recursos de la NASA y Agencias Espaciales</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,362 +14,311 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a2a, #1a1a4a, #0c0c2c);
             margin: 0;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            color: white;
-            overflow-x: hidden;
-            position: relative;
-        }
-        
-        /* Fondo con efecto de portal de Minecraft */
-        .portal-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0a0a2a, #000000);
-        }
-        
-        .portal-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60vmin;
-            height: 60vmin;
-            border-radius: 50%;
-            background: radial-gradient(circle, #1a1aff 0%, #0000cc 30%, #000066 60%, #000022 100%);
-            box-shadow: 0 0 100px 20px rgba(0, 100, 255, 0.7);
-            animation: pulse 4s infinite alternate;
-        }
-        
-        .portal-particle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(30, 144, 255, 0.7);
-            opacity: 0;
-        }
-        
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(1); }
-            100% { transform: translate(-50%, -50%) scale(1.1); }
-        }
-        
-        @keyframes float {
-            0% { 
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0;
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { 
-                transform: translate(var(--tx), var(--ty)) rotate(360deg);
-                opacity: 0;
-            }
+            color: #f0f8ff;
+            line-height: 1.6;
         }
         
         .container {
-            max-width: 900px;
-            width: 100%;
-            background: rgba(10, 10, 40, 0.85);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(7, 30, 69, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(0, 200, 255, 0.3);
         }
         
-        .container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #00ccff, #0066ff, #0033aa);
-        }
-        
-        .header {
-            margin-bottom: 30px;
-            position: relative;
-        }
-        
         h1 {
-            color: #ffffff;
-            margin-bottom: 15px;
             font-size: 2.8rem;
-            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff;
             text-shadow: 0 0 15px rgba(0, 200, 255, 0.8);
         }
         
         .subtitle {
+            font-size: 1.3rem;
             color: #a0d0ff;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         
-        .video-wrapper {
-            position: relative;
-            margin: 30px 0;
+        .intro {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            text-align: center;
+            color: #cceeff;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .resource-card {
+            background: rgba(10, 25, 60, 0.8);
             border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0, 100, 255, 0.6);
-            transition: transform 0.3s ease;
-        }
-        
-        .video-wrapper:hover {
-            transform: scale(1.02);
-        }
-        
-        .video-container {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            padding-top: 56.25%; /* Relación de aspecto 16:9 */
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #0066ff;
             height: 100%;
-            border: none;
-            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
         }
         
-        .video-info {
-            background: rgba(20, 40, 80, 0.6);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 25px;
-            text-align: left;
-            border-left: 4px solid #0066ff;
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 100, 255, 0.5);
+            border-left: 5px solid #00ccff;
         }
         
-        .video-info h3 {
+        .resource-card h3 {
             color: #00ccff;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .video-info p {
+        .resource-card p {
             color: #cceeff;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            flex-grow: 1;
         }
         
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .tag {
-            background: rgba(0, 100, 255, 0.3);
-            color: #99ddff;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid rgba(0, 200, 255, 0.3);
-        }
-        
-        .actions {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        .btn {
+        .resource-link {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 12px 25px;
+            padding: 10px 20px;
             background: linear-gradient(to right, #0066ff, #00aaff);
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
+            margin-top: auto;
         }
         
-        .btn:hover {
+        .resource-link:hover {
             background: linear-gradient(to right, #0055dd, #0099ee);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 150, 255, 0.6);
         }
         
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            backdrop-filter: blur(5px);
+        .agency-section {
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(7, 30, 69, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
         
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        .agency-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 200, 255, 0.7);
         }
         
         .footer {
-            margin-top: 40px;
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
             color: #88bbee;
             font-size: 0.9rem;
+            border-top: 1px solid rgba(0, 200, 255, 0.3);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #00ccff;
         }
         
         @media (max-width: 768px) {
-            .container {
-                padding: 25px;
+            .resources-grid {
+                grid-template-columns: 1fr;
             }
             
             h1 {
                 font-size: 2.2rem;
             }
             
-            .actions {
-                flex-direction: column;
-                align-items: center;
+            .subtitle {
+                font-size: 1.1rem;
             }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="portal-background" id="portalBackground">
-        <div class="portal-center"></div>
-    </div>
+    <div class="stars" id="stars"></div>
     
     <div class="container">
-        <div class="header">
-            <h1>Esta es mi recomendación</h1>
-            <p class="subtitle">Un video que realmente vale la pena ver</p>
-        </div>
-        
-        <div class="video-wrapper">
-            <div class="video-container">
-                <iframe 
-                    src="https://www.youtube.com/embed/kj4LxVhx2-A?start=4" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+        <header>
+            <div class="logo">
+                <i class="fas fa-globe-americas"></i>
             </div>
-        </div>
+            <h1>Datos y Recursos Espaciales</h1>
+            <p class="subtitle">Recopilación de recursos de la NASA y agencias espaciales internacionales</p>
+        </header>
         
-        <div class="video-info">
-            <h3><i class="fas fa-info-circle"></i> Acerca de este video</h3>
-            <p>Este es el video más largo de YouTube, una verdadera maravilla de la perseverancia y dedicación. Con una duración extraordinaria, representa un logro único en la plataforma.</p>
+        <p class="intro">
+            Explora esta colección de plataformas y recursos de datos satelitales proporcionados por la NASA y agencias espaciales internacionales. 
+            Estos recursos ofrecen información valiosa para investigadores, estudiantes y entusiastas del espacio.
+        </p>
+        
+        <h2 class="agency-header"><i class="fas fa-satellite"></i> Recursos de la NASA</h2>
+        <div class="resources-grid">
+            <div class="resource-card">
+                <h3><i class="fas fa-earth-americas"></i> NASA Earthdata Worldview</h3>
+                <p>Una de las principales plataformas de visualización de datos satelitales de la NASA, donde se pueden explorar y descargar imágenes actuales e históricas. Puede encontrar capas de datos globales y por ubicación, por disciplina o fenómeno natural.</p>
+                <a href="https://worldview.earthdata.nasa.gov/" class="resource-link" target="_blank">Acceder al recurso <i class="fas fa-external-link-alt"></i></a>
+            </div>
             
-            <div class="tags">
-                <span class="tag"><i class="fas fa-clock"></i> Larga duración</span>
-                <span class="tag"><i class="fas fa-trophy"></i> Récord</span>
-                <span class="tag"><i class="fas fa-youtube"></i> YouTube</span>
+            <div class="resource-card">
+                <h3><i class="fas fa-camera"></i> Observatorio de la Tierra de la NASA</h3>
+                <p>Ofrece imágenes fijas de alta definición y mapas globales obtenidos por satélites de la NASA. Puede buscar por tema o ubicación y aprender de las descripciones de cada imagen.</p>
+                <a href="https://earthobservatory.nasa.gov/" class="resource-link" target="_blank">Acceder al recurso <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            
+            <div class="resource-card">
+                <h3><i class="fas fa-database"></i> Centro de Datos y Aplicaciones Socioeconómicas de la NASA (SEDAC)</h3>
+                <p>Contiene datos de observación de la Tierra que profundizan en las dinámicas sociales y ambientales, todas ellas vinculadas a los Objetivos de Desarrollo Sostenible (ODS) de las Naciones Unidas.</p>
+                <a href="https://sedac.ciesin.columbia.edu/" class="resource-link" target="_blank">Acceder al recurso <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            
+            <div class="resource-card">
+                <h3><i class="fas fa-layer-group"></i> Capa Global de Asentamientos Humanos (GHSL) de Copernicus</h3>
+                <p>Contiene datos de población global del programa de observación de la Tierra Copernicus de la Unión Europea. Los usuarios pueden acceder a conjuntos de datos y otras visualizaciones a escala local y global.</p>
+                <a href="https://ghsl.jrc.ec.europa.eu/" class="resource-link" target="_blank">Acceder al recurso <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            
+            <div class="resource-card">
+                <h3><i class="fas fa-toolbox"></i> Kit de herramientas de observación de la Tierra</h3>
+                <p>Contiene conjuntos de datos de observación de la Tierra y herramientas para el análisis de temas de sostenibilidad urbana. Incluye recursos de datos y casos de uso.</p>
+                <a href="https://www.earthobservations.org/geoss_wp.php" class="resource-link" target="_blank">Acceder al recurso <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            
+            <div class="resource-card">
+                <h3><i class="fas fa-chart-line"></i> WorldPop</h3>
+                <p>Contiene datos de población de código abierto que pueden arrojar luz sobre el cambio urbano y las densidades de población de países individuales y a escala mundial.</p>
+                <a href="https://www.worldpop.org/" class="resource-link" target="_blank">Acceder al recurso <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            
+            <div class="resource-card">
+                <h3><i class="fas fa-book-open"></i> Catálogo de servicios Copernicus de la UE</h3>
+                <p>La colección completa de conjuntos de datos de observación de la Tierra de los servicios de Copernicus. Los usuarios pueden buscar datos sobre el uso del suelo, el cambio climático, las condiciones atmosféricas, las zonas marinas y más.</p>
+                <a href="https://www.copernicus.eu/en/access-data" class="resource-link" target="_blank">Acceder al recurso <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            
+            <div class="resource-card">
+                <h3><i class="fas fa-search"></i> Explorador de datos del Instituto de Recursos Mundiales (WRI)</h3>
+                <p>El repositorio central de datos de los programas de datos abiertos del WRI. Contiene información sobre paisajes urbanos, ecosistemas, clima y actividad económica.</p>
+                <a href="https://www.wri.org/data" class="resource-link" target="_blank">Acceder al recurso <i class="fas fa-external-link-alt"></i></a>
             </div>
         </div>
         
-        <div class="actions">
-            <button class="btn" onclick="alert('¡Gracias por tu like! 😊')">
-                <i class="fas fa-thumbs-up"></i> Me gusta esta recomendación
-            </button>
-            <a href="https://youtube.com" class="btn btn-secondary" target="_blank">
-                <i class="fab fa-youtube"></i> Ver más videos
-            </a>
+        <div class="agency-section">
+            <h2 class="agency-header"><i class="fas fa-handshake"></i> Recursos para socios de agencias espaciales</h2>
+            
+            <h3 style="color: #00ccff; margin: 25px 0 15px;"><i class="fas fa-maple-leaf"></i> Agencia Espacial Canadiense (CSA)</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3><i class="fas fa-satellite-dish"></i> Misión de la Constelación Radarsat (RCM) - Portal de datos</h3>
+                    <p>La Misión de la Constelación RADARSAT (RCM) es la nueva generación de satélites de observación de la Tierra de Canadá. Incluye tres satélites capaces de explorar la Tierra de día y de noche, en cualquier condición meteorológica.</p>
+                    <a href="https://www.asc-csa.gc.ca/eng/satellites/radarsat/" class="resource-link" target="_blank">Acceder al recurso <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            
+            <h3 style="color: #00ccff; margin: 25px 0 15px;"><i class="fas fa-globe-americas"></i> Agencia Espacial Brasileña (AEB)</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3><i class="fas fa-infinity"></i> Infraestructura Nacional de Datos Espaciales de Brasil (INDE)</h3>
+                    <p>La base de datos geoespacial del INDE ofrece una amplia gama de información territorial producida por organismos gubernamentales brasileños, incluyendo mapas temáticos, imágenes satelitales, datos sobre uso del suelo, infraestructura y medio ambiente.</p>
+                    <a href="http://www.inde.gov.br/" class="resource-link" target="_blank">Acceder al recurso <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3><i class="fas fa-catalog"></i> Catálogo del Instituto Brasileño de Investigaciones Espaciales (INPE)</h3>
+                    <p>El Catálogo de Imágenes del INPE ofrece una base de datos con miles de imágenes generadas por más de 16 satélites, con resoluciones que varían de 2 a 64 metros. Todas las imágenes están disponibles al público.</p>
+                    <a href="http://www.dgi.inpe.br/catalog/" class="resource-link" target="_blank">Acceder al recurso <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
         </div>
         
         <div class="footer">
-            <p>Recomendado el 19 de septiembre de 2025 • ¡Disfruta del contenido!</p>
+            <p>Recopilación de recursos espaciales • Actualizado en septiembre de 2025</p>
+            <p>Explora, descubre y aprende con datos espaciales de acceso abierto</p>
         </div>
     </div>
 
     <script>
-        // Efecto de escritura gradual del título
+        // Crear efecto de estrellas en el fondo
         document.addEventListener('DOMContentLoaded', function() {
-            const title = document.querySelector('h1');
-            const originalText = title.textContent;
-            title.textContent = '';
-            let i = 0;
+            const starsContainer = document.getElementById('stars');
+            const starsCount = 150;
             
-            function typeWriter() {
-                if (i < originalText.length) {
-                    title.textContent += originalText.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100);
-                }
-            }
-            
-            setTimeout(typeWriter, 500);
-            
-            // Crear partículas para el efecto de portal
-            createParticles();
-        });
-        
-        function createParticles() {
-            const portalBg = document.getElementById('portalBackground');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('portal-particle');
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
                 
                 // Tamaño aleatorio
-                const size = Math.random() * 10 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
                 
-                // Color aleatorio (tonos azules y púrpuras)
-                const colors = ['#1E90FF', '#4169E1', '#6A5ACD', '#4B0082', '#00BFFF'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.background = randomColor;
+                // Posición aleatoria
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
                 
-                // Posición inicial aleatoria (cerca del centro)
-                const centerX = window.innerWidth / 2;
-                const centerY = window.innerHeight / 2;
-                const angle = Math.random() * Math.PI * 2;
-                const radius = Math.random() * 100 + 50;
+                // Opacidad aleatoria
+                star.style.opacity = Math.random();
                 
-                const startX = centerX + Math.cos(angle) * radius;
-                const startY = centerY + Math.sin(angle) * radius;
+                // Duración de animación aleatoria
+                const duration = 2 + Math.random() * 8;
+                star.style.animationDuration = `${duration}s`;
                 
-                particle.style.left = `${startX}px`;
-                particle.style.top = `${startY}px`;
+                // Retraso de animación aleatorio
+                star.style.animationDelay = `${Math.random() * 5}s`;
                 
-                // Dirección aleatoria
-                const tx = (Math.random() - 0.5) * window.innerWidth;
-                const ty = (Math.random() - 0.5) * window.innerHeight;
-                
-                particle.style.setProperty('--tx', `${tx}px`);
-                particle.style.setProperty('--ty', `${ty}px`);
-                
-                // Duración aleatoria
-                const duration = Math.random() * 20 + 10;
-                particle.style.animation = `float ${duration}s linear infinite`;
-                
-                // Retraso aleatorio
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                
-                portalBg.appendChild(particle);
+                starsContainer.appendChild(star);
             }
-        }
+        });
     </script>
 </body>
 </html>
