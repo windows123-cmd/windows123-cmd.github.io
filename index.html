@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recursos de la NASA y Agencias Espaciales</title>
+    <title>Bio City Designers - Recursos Recomendados</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -25,6 +25,32 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+        }
+        
+        .brand-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(20, 80, 40, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(100, 255, 150, 0.3);
+            animation: pulse 3s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); }
+            100% { box-shadow: 0 4px 20px rgba(100, 255, 150, 0.5); }
+        }
+        
+        .brand-header h2 {
+            font-size: 2rem;
+            color: #a0ffb0;
+            text-shadow: 0 0 10px rgba(100, 255, 150, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
         
         header {
@@ -291,6 +317,10 @@
                 font-size: 1.1rem;
             }
             
+            .brand-header h2 {
+                font-size: 1.6rem;
+            }
+            
             .theme-toggle {
                 top: 10px;
                 right: 10px;
@@ -326,6 +356,16 @@
         body.light-mode {
             background: linear-gradient(135deg, #c9d6ff, #e2e2e2);
             color: #333;
+        }
+        
+        body.light-mode .brand-header {
+            background: rgba(180, 255, 200, 0.9);
+            border: 1px solid rgba(50, 200, 100, 0.5);
+        }
+        
+        body.light-mode .brand-header h2 {
+            color: #2c7d46;
+            text-shadow: none;
         }
         
         body.light-mode header,
@@ -377,6 +417,11 @@
     <div class="stars" id="stars"></div>
     
     <div class="container">
+        <!-- Encabezado de Bio City Designers -->
+        <div class="brand-header">
+            <h2><i class="fas fa-seedling"></i> Bio City Designers Recomienda:</h2>
+        </div>
+        
         <header>
             <div class="logo">
                 <i class="fas fa-rocket"></i>
@@ -450,7 +495,7 @@
                 <div class="resource-card">
                     <h3><i class="fas fa-satellite-dish"></i> Misión de la Constelación Radarsat (RCM) - Portal de datos</h3>
                     <p>La Misión de la Constelación RADARSAT (RCM) es la nueva generación de satélites de observación de la Tierra de Canadá. Incluye tres satélites capaces de explorar la Tierra de día y de noche, en cualquier condición meteorológica.</p>
-                    <a href="https://www.asc-csa.gc.ca/eng/satellites/radarsat/" class="resource-link" target="_blank">Acceder al recurso <i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://www.asc-csa.gc.edu/eng/satellites/radarsat/" class="resource-link" target="_blank">Acceder al recurse <i class="fas fa-external-link-alt"></i></a>
                 </div>
             </div>
             
