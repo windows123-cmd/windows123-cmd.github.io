@@ -3,605 +3,779 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bio City Designers</title>
+    <title>UrbanData - Ciudades Saludables con Datos Espaciales</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a2a, #1a1a4a);
-            padding: 20px;
-            color: #f0f8ff;
-            line-height: 1.6;
-            transition: all 0.3s ease;
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --card-bg: #ffffff;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
-        
-        .container { max-width: 1000px; margin: 0 auto; }
-        
-        .theme-toggle {
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(10, 25, 60, 0.8);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
             display: flex;
             align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 100;
-            color: #00ccff;
-            font-size: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            gap: 8px;
         }
-        
-        .theme-toggle:hover {
-            transform: rotate(30deg);
-            box-shadow: 0 0 15px rgba(0, 200, 255, 0.7);
+
+        .logo i {
+            color: var(--secondary);
         }
-        
-        .brand-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 25px;
-            background: linear-gradient(125deg, rgba(20, 80, 40, 0.85), rgba(30, 100, 50, 0.9));
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(120, 255, 160, 0.6);
-            position: relative;
-            transition: all 0.3s ease;
+
+        .logo span {
+            color: var(--secondary);
         }
-        
-        .brand-header h2 {
-            font-size: 2.5rem;
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(180, 255, 200, 0.9);
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .brand-subtitle {
-            font-size: 1.2rem;
-            color: #d0ffd6;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .houses-container {
+
+        nav ul {
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 15px;
+            list-style: none;
         }
-        
-        .house {
-            width: 70px;
-            height: 60px;
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
             position: relative;
         }
-        
-        .house-body {
-            width: 100%;
-            height: 40px;
-            background: #81c784;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
+
+        nav ul li a:after {
+            content: '';
             position: absolute;
-            bottom: 0;
-        }
-        
-        .house-roof {
             width: 0;
-            height: 0;
-            border-left: 35px solid transparent;
-            border-right: 35px solid transparent;
-            border-bottom: 25px solid #4caf50;
-            position: absolute;
-            top: -18px;
+            height: 2px;
+            bottom: -5px;
             left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
         }
-        
-        .house-window {
-            width: 18px;
-            height: 18px;
-            background: #bbdefb;
-            border-radius: 3px;
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            box-shadow: 0 0 10px #bbdefb;
+
+        nav ul li a:hover {
+            color: var(--primary);
         }
-        
-        .house-door {
-            width: 18px;
-            height: 25px;
-            background: #5d4037;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-            position: absolute;
-            bottom: 0;
-            right: 12px;
+
+        nav ul li a:hover:after {
+            width: 100%;
         }
-        
-        .eco-house .house-body { background: #66bb6a; }
-        .eco-house .house-roof { border-bottom-color: #388e3c; }
-        
-        .eco-house .solar-panel {
-            width: 30px;
-            height: 12px;
-            background: #37474f;
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), #0ca678);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.9)), 
+                        url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 180px 0 120px;
+            margin-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Section Common */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
             position: absolute;
-            top: -20px;
-            left: 10px;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
             border-radius: 2px;
         }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: rgba(7, 30, 69, 0.7);
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
-        }
-        
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            color: #ffffff;
-            transition: all 0.3s ease;
-        }
-        
-        .subtitle {
+
+        .section-title p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: var(--gray);
             font-size: 1.1rem;
-            color: #a0d0ff;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
         }
-        
-        .intro {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #cceeff;
-            transition: all 0.3s ease;
+
+        /* Challenge Section */
+        .challenge {
+            background-color: var(--card-bg);
         }
-        
-        .videos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+
+        .challenge-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
         }
-        
-        .video-card {
-            background: rgba(10, 25, 60, 0.8);
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+
+        .challenge-text {
+            flex: 1;
         }
-        
-        .video-card:hover { transform: translateY(-5px); }
-        
-        .video-container {
-            position: relative;
+
+        .challenge-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .challenge-text p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .challenge-image {
+            flex: 1;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .challenge-image:hover {
+            transform: translateY(-10px);
+        }
+
+        .challenge-image img {
             width: 100%;
-            padding-top: 56.25%;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            height: auto;
+            display: block;
         }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 8px;
+
+        /* Data Types Section */
+        .data-types {
+            background-color: #f1f5f9;
         }
-        
-        .video-info h3 {
-            color: #00ccff;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .video-info p {
-            color: #cceeff;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-        
-        .resources-grid {
+
+        .data-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
         }
-        
-        .resource-card {
-            background: rgba(10, 25, 60, 0.8);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .resource-card h3 {
-            color: #00ccff;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .resource-card p {
-            color: #cceeff;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-        
-        .resource-link {
-            display: inline-block;
-            padding: 8px 16px;
-            background: #0066ff;
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .resource-link:hover {
-            background: #0055dd;
-            transform: translateY(-2px);
-        }
-        
-        .agency-section {
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(7, 30, 69, 0.7);
+
+        .data-card {
+            background-color: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border-top: 4px solid var(--primary);
         }
-        
-        .agency-header {
-            text-align: center;
+
+        .data-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .data-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
             margin-bottom: 20px;
-            color: #ffffff;
-            transition: all 0.3s ease;
-        }
-        
-        .air-quality-section {
-            margin: 40px 0;
-            text-align: center;
-            padding: 25px;
-            background: rgba(10, 25, 60, 0.8);
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .air-quality-section h3 {
-            color: #00ccff;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            transition: all 0.3s ease;
-        }
-        
-        .air-quality-section p {
-            color: #cceeff;
-            margin-bottom: 20px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            transition: all 0.3s ease;
-        }
-        
-        .air-quality-link {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 10px;
-            padding: 12px 24px;
-            background: linear-gradient(to right, #4CAF50, #45a049);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
+        }
+
+        .data-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 1.4rem;
+        }
+
+        .data-card p {
+            margin-bottom: 20px;
+            color: var(--gray);
+            flex-grow: 1;
+        }
+
+        .platform-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 15px;
+            color: var(--primary);
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            transition: var(--transition);
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
         }
-        
-        .air-quality-link:hover {
-            background: linear-gradient(to right, #45a049, #3d8b40);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+
+        .platform-link:hover {
+            color: var(--primary-dark);
+            gap: 12px;
         }
-        
-        .footer {
+
+        /* Tools Section */
+        .tools {
+            background-color: var(--card-bg);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .tool-card {
             text-align: center;
-            margin-top: 30px;
-            padding: 15px;
-            color: #88bbee;
+            padding: 40px 25px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .tool-card:hover .tool-icon {
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .tool-card:hover h3,
+        .tool-card:hover p {
+            color: white;
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .tool-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .tool-card p {
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--primary);
+        }
+
+        .cta .btn:hover {
+            background: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: var(--secondary);
+            font-size: 1.3rem;
+        }
+
+        .footer-column p {
+            color: #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+            gap: 12px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #334155;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
         }
-        
-        /* Modo Claro */
-        body.light-mode {
-            background: linear-gradient(135deg, #c9d6ff, #e2e2e2);
-            color: #333;
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .challenge-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
         }
-        
-        body.light-mode .theme-toggle {
-            background: rgba(255, 255, 255, 0.9);
-            color: #0066cc;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        body.light-mode .brand-header {
-            background: linear-gradient(125deg, rgba(180, 255, 200, 0.9), rgba(200, 255, 220, 0.95));
-            border: 2px solid rgba(50, 200, 100, 0.6);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        body.light-mode .brand-header h2 {
-            color: #2c7d46;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        body.light-mode .brand-subtitle {
-            color: #2c7d46;
-        }
-        
-        body.light-mode header,
-        body.light-mode .agency-section,
-        body.light-mode .resource-card,
-        body.light-mode .video-card,
-        body.light-mode .air-quality-section {
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            color: #333;
-        }
-        
-        body.light-mode h1,
-        body.light-mode .agency-header {
-            color: #0066cc;
-        }
-        
-        body.light-mode .subtitle,
-        body.light-mode .footer {
-            color: #556;
-        }
-        
-        body.light-mode .resource-card h3,
-        body.light-mode .video-info h3,
-        body.light-mode .air-quality-section h3 {
-            color: #0066cc;
-        }
-        
-        body.light-mode .resource-card p,
-        body.light-mode .video-info p,
-        body.light-mode .intro,
-        body.light-mode .air-quality-section p {
-            color: #444;
-        }
-        
-        body.light-mode .resource-link {
-            background: linear-gradient(to right, #0066cc, #0088ff);
-        }
-        
+
         @media (max-width: 768px) {
-            .brand-header h2 { font-size: 2rem; }
-            h1 { font-size: 1.8rem; }
-            .houses-container { gap: 15px; }
-            .house { transform: scale(0.8); }
-            .air-quality-section { padding: 20px; }
-            .air-quality-link { font-size: 1rem; padding: 10px 20px; }
-            .theme-toggle {
-                top: 10px;
-                right: 10px;
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+            
+            .data-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <button class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-    </button>
-    
-    <div class="container">
-        <div class="brand-header">
-            <h2><i class="fas fa-seedling"></i> Bio City Designers Recomienda:</h2>
-            <p class="brand-subtitle">Diseño sostenible para un futuro urbano mejor</p>
-            
-            <div class="houses-container">
-                <div class="house">
-                    <div class="house-roof"></div>
-                    <div class="house-body"></div>
-                    <div class="house-window"></div>
-                    <div class="house-door"></div>
+    <!-- ENCABEZADO -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-globe-americas"></i>
+                    Urban<span>Data</span>
                 </div>
-                
-                <div class="house eco-house">
-                    <div class="house-roof"></div>
-                    <div class="house-body"></div>
-                    <div class="house-window"></div>
-                    <div class="house-door"></div>
-                    <div class="solar-panel"></div>
-                </div>
-                
-                <div class="house">
-                    <div class="house-roof"></div>
-                    <div class="house-body"></div>
-                    <div class="house-window"></div>
-                    <div class="house-door"></div>
-                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#desafio">El Desafío</a></li>
+                        <li><a href="#datos">Tipos de Datos</a></li>
+                        <li><a href="#herramientas">Herramientas</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="#" class="btn">Acceder a Datos</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
-        
-        <header>
-            <h1>Exploración Espacial y Datos Satelitales</h1>
-            <p class="subtitle">Recursos de la NASA y agencias espaciales internacionales</p>
-        </header>
-        
-        <p class="intro">
-            Descubre recursos de datos satelitales y observación terrestre proporcionados por la NASA y agencias espaciales.
-        </p>
-        
-        <div class="videos-grid">
-            <div class="video-card">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/URuxOFkTl5A" allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <h3><i class="fas fa-leaf"></i> Como Hacer Un Techo Verde</h3>
-                    <p>Como Hacer Un Techo Verde Paso a Paso Detallado</p>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/YbErFpeoJ6w" allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <h3><i class="fas fa-solar-panel"></i> Paneles de Elon Musk</h3>
-                    <p>Nuevos Paneles Solares Mas Eficientes y Mas Baratos</p>
-                </div>
-            </div>
-        </div>
-        
-        <h2 class="agency-header"><i class="fas fa-satellite"></i> Recursos de la NASA</h2>
-        <div class="resources-grid">
-            <div class="resource-card">
-                <h3><i class="fas fa-earth-americas"></i> NASA Earthdata Worldview</h3>
-                <p>Una de las principales plataformas de visualización de datos satelitales de la NASA, donde se pueden explorar y descargar imágenes actuales e históricas.</p>
-                <a href="https://worldview.earthdata.nasa.gov/" class="resource-link" target="_blank">Acceder al recurso</a>
-            </div>
-            
-            <div class="resource-card">
-                <h3><i class="fas fa-camera"></i> Observatorio de la Tierra de la NASA</h3>
-                <p>Ofrece imágenes fijas de alta definición y mapas globales obtenidos por satélites de la NASA.</p>
-                <a href="https://earthobservatory.nasa.gov/" class="resource-link" target="_blank">Acceder al recurso</a>
-            </div>
-            
-            <div class="resource-card">
-                <h3><i class="fas fa-database"></i> Centro de Datos y Aplicaciones Socioeconómicas de la NASA (SEDAC)</h3>
-                <p>Contiene datos de observación de la Tierra que profundizan en las dinámicas sociales y ambientales.</p>
-                <a href="https://sedac.ciesin.columbia.edu/" class="resource-link" target="_blank">Acceder al recurso</a>
-            </div>
-            
-            <div class="resource-card">
-                <h3><i class="fas fa-layer-group"></i> Capa Global de Asentamientos Humanos (GHSL) de Copernicus</h3>
-                <p>Contiene datos de población global del programa de observación de la Tierra Copernicus de la Unión Europea.</p>
-                <a href="https://ghsl.jrc.ec.europa.eu/" class="resource-link" target="_blank">Acceder al recurso</a>
-            </div>
-            
-            <div class="resource-card">
-                <h3><i class="fas fa-toolbox"></i> Kit de herramientas de observación de la Tierra</h3>
-                <p>Contiene conjuntos de datos de observación de la Tierra y herramientas para el análisis de temas de sostenibilidad urbana.</p>
-                <a href="https://www.earthobservations.org/geoss_wp.php" class="resource-link" target="_blank">Acceder al recurso</a>
-            </div>
-            
-            <div class="resource-card">
-                <h3><i class="fas fa-chart-line"></i> WorldPop</h3>
-                <p>Contiene datos de población de código abierto que pueden arrojar luz sobre el cambio urbano y las densidades de población.</p>
-                <a href="https://www.worldpop.org/" class="resource-link" target="_blank">Acceder al recurso</a>
-            </div>
-            
-            <div class="resource-card">
-                <h3><i class="fas fa-book-open"></i> Catálogo de servicios Copernicus de la UE</h3>
-                <p>La colección completa de conjuntos de datos de observación de la Tierra de los servicios de Copernicus.</p>
-                <a href="https://www.copernicus.eu/en/access-data" class="resource-link" target="_blank">Acceder al recurso</a>
-            </div>
-            
-            <div class="resource-card">
-                <h3><i class="fas fa-search"></i> Explorador de datos del Instituto de Recursos Mundiales (WRI)</h3>
-                <p>El repositorio central de datos de los programas de datos abiertos del WRI.</p>
-                <a href="https://www.wri.org/data" class="resource-link" target="_blank">Acceder al recurso</a>
-            </div>
-        </div>
-        
-        <div class="agency-section">
-            <h2 class="agency-header"><i class="fas fa-handshake"></i> Recursos para socios de agencias espaciales</h2>
-            
-            <h3 style="color: #00ccff; margin: 25px 0 15px;"><i class="fas fa-maple-leaf"></i> Agencia Espacial Canadiense (CSA)</h3>
-            <div class="resources-grid">
-                <div class="resource-card">
-                    <h3><i class="fas fa-satellite-dish"></i> Misión de la Constelación Radarsat (RCM) - Portal de datos</h3>
-                    <p>La Misión de la Constelación RADARSAT (RCM) es la nueva generación de satélites de observación de la Tierra de Canadá.</p>
-                    <a href="https://www.asc-csa.gc.ca/eng/satellites/radarsat/" class="resource-link" target="_blank">Acceder al recurso</a>
-                </div>
-            </div>
-            
-            <h3 style="color: #00ccff; margin: 25px 0 15px;"><i class="fas fa-globe-americas"></i> Agencia Espacial Brasileña (AEB)</h3>
-            <div class="resources-grid">
-                <div class="resource-card">
-                    <h3><i class="fas fa-infinity"></i> Infraestructura Nacional de Datos Espaciales de Brasil (INDE)</h3>
-                    <p>La base de datos geoespacial del INDE ofrece una amplia gama de información territorial producida por organismos gubernamentales brasileños.</p>
-                    <a href="http://www.inde.gov.br/" class="resource-link" target="_blank">Acceder al recurso</a>
-                </div>
-                
-                <div class="resource-card">
-                    <h3><i class="fas fa-catalog"></i> Catálogo del Instituto Brasileño de Investigaciones Espaciales (INPE)</h3>
-                    <p>El Catálogo de Imágenes del INPE ofrece una base de datos con miles de imágenes generadas por más de 16 satélites.</p>
-                    <a href="http://www.dgi.inpe.br/catalog/" class="resource-link" target="_blank">Acceder al recurso</a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Sección de Calidad del Aire al final -->
-        <div class="air-quality-section">
-            <h3><i class="fas fa-wind"></i> Monitoreo de Calidad del Aire Global</h3>
-            <p>Consulta la calidad del aire en tiempo real en ciudades de todo el mundo. Datos actualizados sobre contaminación atmosférica y recomendaciones para la salud.</p>
-            <a href="https://www.iqair.com/es/world-air-quality" class="air-quality-link" target="_blank">
-                <i class="fas fa-external-link-alt"></i> Ver Calidad del Aire Mundial
-            </a>
-        </div>
-        
-        <div class="footer">
-            <p>Recopilación de recursos espaciales • Actualizado en 2025</p>
-            <p>Bio City Designers - Promoviendo el diseño urbano sostenible</p>
-        </div>
-    </div>
+    </header>
 
-    <script>
-        // Configurar el toggle del tema
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeToggle = document.getElementById('themeToggle');
-            const body = document.body;
-            
-            // Verificar preferencia guardada
-            if (localStorage.getItem('theme') === 'light') {
-                body.classList.add('light-mode');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            }
-            
-            themeToggle.addEventListener('click', function() {
-                body.classList.toggle('light-mode');
-                
-                if (body.classList.contains('light-mode')) {
-                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-                    localStorage.setItem('theme', 'dark');
-                }
-            });
-        });
-    </script>
+    <!-- SECCIÓN HERO -->
+    <section class="hero">
+        <div class="container">
+            <h1>Transforma Ciudades con Datos Espaciales</h1>
+            <p>Utiliza datos de la NASA y otras fuentes para diagnosticar, monitorear y mejorar la salud de las ciudades. Toma decisiones informadas para crear entornos urbanos más saludables y sostenibles.</p>
+            <div class="hero-buttons">
+                <a href="#datos" class="btn">Explorar Datos Disponibles</a>
+                <a href="#herramientas" class="btn btn-secondary">Ver Herramientas</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DESAFÍO -->
+    <section id="desafio" class="challenge">
+        <div class="container">
+            <div class="section-title">
+                <h2>El Desafío de las Ciudades Saludables</h2>
+                <p>Las áreas urbanas enfrentan problemas críticos que afectan la calidad de vida de sus habitantes. Los datos espaciales ofrecen soluciones.</p>
+            </div>
+            <div class="challenge-content">
+                <div class="challenge-text">
+                    <h3>Diagnóstico y Soluciones Basadas en Datos</h3>
+                    <p>El desafío "Data Pathways to Healthy Cities and Human Settlements" de NASA Space Apps invita a urbanistas, planificadores y comunidades a utilizar datos abiertos para abordar problemas urbanos críticos.</p>
+                    <p>Mediante el análisis de datos de calidad del aire, temperatura superficial, cobertura vegetal y accesibilidad a servicios, podemos identificar áreas de mejora y diseñar intervenciones efectivas.</p>
+                    <p>Nuestra plataforma facilita el acceso a estos datos y proporciona herramientas para su análisis, ayudándote a crear ciudades más habitables, equitativas y resilientes.</p>
+                    <a href="#datos" class="btn">Ver Plataformas Disponibles</a>
+                </div>
+                <div class="challenge-image">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Ciudad sostenible">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN TIPOS DE DATOS -->
+    <section id="datos" class="data-types">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tipos de Datos Disponibles</h2>
+                <p>Accede a una amplia gama de datos espaciales y terrestres para tu análisis urbano.</p>
+            </div>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-icon">
+                        <i class="fas fa-temperature-high"></i>
+                        <h3>Isla de Calor Urbana</h3>
+                    </div>
+                    <p>Datos de temperatura superficial de Landsat y MODIS para identificar y cuantificar el efecto de isla de calor en diferentes zonas urbanas.</p>
+                    <a href="https://worldview.earthdata.nasa.gov/" target="_blank" class="platform-link">
+                        <i class="fas fa-external-link-alt"></i> NASA Worldview
+                    </a>
+                </div>
+                <div class="data-card">
+                    <div class="data-icon">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Espacios Verdes</h3>
+                    </div>
+                    <p>Información sobre cobertura vegetal mediante índices NDVI de Sentinel-2 y Landsat para evaluar la distribución de áreas verdes.</p>
+                    <a href="https://earthobservatory.nasa.gov/" target="_blank" class="platform-link">
+                        <i class="fas fa-external-link-alt"></i> NASA Earth Observatory
+                    </a>
+                </div>
+                <div class="data-card">
+                    <div class="data-icon">
+                        <i class="fas fa-wind"></i>
+                        <h3>Calidad del Aire</h3>
+                    </div>
+                    <p>Datos de contaminantes atmosféricos (NO2, CO, aerosoles) de instrumentos como TROPOMI y GEOS-CF de la NASA.</p>
+                    <a href="https://search.earthdata.nasa.gov/search" target="_blank" class="platform-link">
+                        <i class="fas fa-external-link-alt"></i> NASA Earthdata Search
+                    </a>
+                </div>
+                <div class="data-card">
+                    <div class="data-icon">
+                        <i class="fas fa-city"></i>
+                        <h3>Asentamientos Humanos</h3>
+                    </div>
+                    <p>Datos globales sobre distribución de población, densidad de construcciones y expansión urbana.</p>
+                    <a href="https://human-settlement.emergency.copernicus.eu/" target="_blank" class="platform-link">
+                        <i class="fas fa-external-link-alt"></i> Copernicus GHSL
+                    </a>
+                </div>
+                <div class="data-card">
+                    <div class="data-icon">
+                        <i class="fas fa-users"></i>
+                        <h3>Datos Demográficos</h3>
+                    </div>
+                    <p>Información de alta resolución sobre distribución poblacional, dinámica y características demográficas.</p>
+                    <a href="https://www.worldpop.org/" target="_blank" class="platform-link">
+                        <i class="fas fa-external-link-alt"></i> WorldPop
+                    </a>
+                </div>
+                <div class="data-card">
+                    <div class="data-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Indicadores Educativos</h3>
+                    </div>
+                    <p>Datos sobre calidad educativa en Brasil a través del Índice de Desarrollo de Educación Básica (IDEB).</p>
+                    <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb" target="_blank" class="platform-link">
+                        <i class="fas fa-external-link-alt"></i> IDEB Brasil
+                    </a>
+                </div>
+                <div class="data-card">
+                    <div class="data-icon">
+                        <i class="fas fa-satellite"></i>
+                        <h3>Imágenes CBERS</h3>
+                    </div>
+                    <p>Imágenes satelitales del programa China-Brazil Earth Resources Satellite para América Latina.</p>
+                    <a href="https://www.dgi.inpe.br/catalogo/explore" target="_blank" class="platform-link">
+                        <i class="fas fa-external-link-alt"></i> CBERS INPE
+                    </a>
+                </div>
+                <div class="data-card">
+                    <div class="data-icon">
+                        <i class="fas fa-globe-europe"></i>
+                        <h3>Datos Copernicus</h3>
+                    </div>
+                    <p>Acceso al catálogo completo de servicios de observación terrestre del programa europeo Copernicus.</p>
+                    <a href="https://www.copernicus.eu/en/accessing-data-where-and-how/copernicus-services-catalogue" target="_blank" class="platform-link">
+                        <i class="fas fa-external-link-alt"></i> Catálogo Copernicus
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN HERRAMIENTAS -->
+    <section id="herramientas" class="tools">
+        <div class="container">
+            <div class="section-title">
+                <h2>Herramientas de Análisis</h2>
+                <p>Utiliza nuestras herramientas especializadas para procesar y visualizar datos urbanos.</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Mapas Interactivos</h3>
+                    <p>Visualiza capas de datos superpuestas para identificar correlaciones y patrones espaciales.</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Análisis Temporal</h3>
+                    <p>Examina cambios a lo largo del tiempo para evaluar tendencias y efectividad de intervenciones.</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Comparación de Escenarios</h3>
+                    <p>Simula el impacto potencial de diferentes intervenciones urbanas antes de implementarlas.</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Generador de Reportes</h3>
+                    <p>Crea informes automatizados con visualizaciones y métricas clave para la toma de decisiones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN LLAMADA A LA ACCIÓN -->
+    <section class="cta">
+        <div class="container">
+            <h2>Comienza a Transformar Tu Ciudad Hoy</h2>
+            <p>Únete a una comunidad global de urbanistas que utilizan datos para crear entornos urbanos más saludables y sostenibles. Accede gratuitamente a datos y herramientas poderosas.</p>
+            <a href="#contacto" class="btn">Contactar Especialistas</a>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA -->
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>UrbanData</h3>
+                    <p>Plataforma para urbanistas que utilizan datos espaciales para crear ciudades más saludables y sostenibles.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#desafio"><i class="fas fa-chevron-right"></i> El Desafío</a></li>
+                        <li><a href="#datos"><i class="fas fa-chevron-right"></i> Tipos de Datos</a></li>
+                        <li><a href="#herramientas"><i class="fas fa-chevron-right"></i> Herramientas</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Documentación</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="https://worldview.earthdata.nasa.gov/" target="_blank"><i class="fas fa-external-link-alt"></i> NASA Worldview</a></li>
+                        <li><a href="https://earthobservatory.nasa.gov/" target="_blank"><i class="fas fa-external-link-alt"></i> Earth Observatory</a></li>
+                        <li><a href="https://www.worldpop.org/" target="_blank"><i class="fas fa-external-link-alt"></i> WorldPop</a></li>
+                        <li><a href="https://www.copernicus.eu/" target="_blank"><i class="fas fa-external-link-alt"></i> Copernicus</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><a href="mailto:info@urbandata.org"><i class="fas fa-envelope"></i> info@urbandata.org</a></li>
+                        <li><a href="tel:+15551234567"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Calle Urbanismo, Ciudad</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 UrbanData. Desarrollado para NASA Space Apps Challenge.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
