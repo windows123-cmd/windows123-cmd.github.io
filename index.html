@@ -379,6 +379,77 @@
             margin-bottom: 20px;
         }
 
+        /* Image Selector Styles */
+        .image-selector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .image-selector h3 {
+            color: var(--dark);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .selector-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .selector-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .selector-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .selector-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .selected-image-container {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .selected-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .selected-image-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
         /* Tools Section */
         .tools {
             background-color: #f1f5f9;
@@ -611,6 +682,15 @@
             .video-container video {
                 height: 250px;
             }
+            
+            .selector-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .selector-btn {
+                width: 200px;
+            }
         }
     </style>
 </head>
@@ -808,6 +888,19 @@
                     </div>
                 </div>
                 
+                <!-- Selector de Imágenes -->
+                <div class="image-selector">
+                    <h3>Visualización de Proyectos</h3>
+                    <p>Selecciona una imagen para ver ejemplos de análisis urbanos:</p>
+                    <div class="selector-buttons">
+                        <button class="selector-btn active" onclick="selectImage('imagen1.jpg', this)">Análisis de Vegetación</button>
+                        <button class="selector-btn" onclick="selectImage('imagen2.jpg', this)">Mapa de Calor Urbano</button>
+                    </div>
+                    <div class="selected-image-container">
+                        <img id="selected-image" src="imagen1.jpg" alt="Imagen seleccionada">
+                    </div>
+                </div>
+                
                 <div class="video-info" style="margin-top: 30px;">
                     <a href="https://www.youtube.com/channel/UC8O2HzY0oRfEC8RlDkQ6JYg" target="_blank" class="btn">
                         <i class="fab fa-youtube"></i> Más Tutoriales
@@ -832,7 +925,7 @@
                     <h3>Mapas Interactivos</h3>
                     <p>Visualiza capas de datos superpuestas para identificar correlaciones y patrones espaciales.</p>
                     <a href="https://qgis.org/resources/installation-guide/" target="_blank" class="platform-link">
-                        <i class=" fa-external-link-alt"></i> QGuis
+                        <i class="fas fa-external-link-alt"></i> QGuis
                     </a>
                 </div>
                 <div class="tool-card">
@@ -849,7 +942,7 @@
                     <h3>Google earth pro</h3>
                     <p>Una herramienta para comparar imágenes satelitales históricas con las actuales.</p> 
                     <a href="https://maps.google.com/intl/es/earth/download/gep/agree.html" target="_blank" class="platform-link">
-                        <i class=" fa-external-link-alt"></i> Google earth pro
+                        <i class="fas fa-external-link-alt"></i> Google earth pro
                     </a>
                 </div>
                 <div class="tool-card">
@@ -918,5 +1011,18 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Función para cambiar la imagen seleccionada
+        function selectImage(imageSrc, button) {
+            // Actualizar la imagen
+            document.getElementById('selected-image').src = imageSrc;
+            
+            // Actualizar botones activos
+            const buttons = document.querySelectorAll('.selector-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        }
+    </script>
 </body>
 </html>
