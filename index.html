@@ -317,9 +317,53 @@
             gap: 12px;
         }
 
+        /* Tutorial Section */
+        .tutorials {
+            background-color: var(--card-bg);
+        }
+
+        .tutorial-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            display: block;
+        }
+
+        .video-info {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .video-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .video-info p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
         /* Tools Section */
         .tools {
-            background-color: var(--card-bg);
+            background-color: #f1f5f9;
         }
 
         .tools-grid {
@@ -332,9 +376,9 @@
             text-align: center;
             padding: 40px 25px;
             border-radius: 12px;
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            background: var(--card-bg);
             transition: var(--transition);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow);
         }
 
         .tool-card:hover {
@@ -494,6 +538,10 @@
             .section-title h2 {
                 font-size: 2rem;
             }
+            
+            .video-container iframe {
+                height: 400px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -531,6 +579,10 @@
             .data-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .video-container iframe {
+                height: 250px;
+            }
         }
     </style>
 </head>
@@ -547,9 +599,9 @@
                     <ul>
                         <li><a href="#desafio">El Desafío</a></li>
                         <li><a href="#datos">Tipos de Datos</a></li>
+                        <li><a href="#tutoriales">Tutoriales</a></li>
                         <li><a href="#herramientas">Herramientas</a></li>
                         <li><a href="#contacto">Contacto</a></li>
-                        <li><a href="#" class="btn">Acceder a Datos</a></li>
                     </ul>
                 </nav>
             </div>
@@ -563,7 +615,7 @@
             <p>Utiliza datos de la NASA y otras fuentes para diagnosticar, monitorear y mejorar la salud de las ciudades. Toma decisiones informadas para crear entornos urbanos más saludables y sostenibles.</p>
             <div class="hero-buttons">
                 <a href="#datos" class="btn">Explorar Datos Disponibles</a>
-                <a href="#herramientas" class="btn btn-secondary">Ver Herramientas</a>
+                <a href="#tutoriales" class="btn btn-secondary">Ver Tutoriales</a>
             </div>
         </div>
     </section>
@@ -682,6 +734,28 @@
         </div>
     </section>
 
+    <!-- SECCIÓN TUTORIALES -->
+    <section id="tutoriales" class="tutorials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tutoriales y Recursos</h2>
+                <p>Aprende a utilizar herramientas de análisis espacial para el desarrollo urbano sostenible.</p>
+            </div>
+            <div class="tutorial-content">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/LtJJAay7Fvs" title="Genera Mapas Web Interactivos con QGIS 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Genera Mapas Web Interactivos con QGIS 3</h3>
+                    <p>Aprende a crear mapas web interactivos utilizando QGIS 3, una de las herramientas más poderosas para el análisis espacial y la visualización de datos urbanos. Este tutorial te guiará paso a paso en la creación de visualizaciones atractivas y funcionales para tus proyectos de planificación urbana.</p>
+                    <a href="https://www.youtube.com/channel/UC8O2HzY0oRfEC8RlDkQ6JYg" target="_blank" class="btn">
+                        <i class="fab fa-youtube"></i> Más Tutoriales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SECCIÓN HERRAMIENTAS -->
     <section id="herramientas" class="tools">
         <div class="container">
@@ -750,8 +824,8 @@
                     <ul>
                         <li><a href="#desafio"><i class="fas fa-chevron-right"></i> El Desafío</a></li>
                         <li><a href="#datos"><i class="fas fa-chevron-right"></i> Tipos de Datos</a></li>
+                        <li><a href="#tutoriales"><i class="fas fa-chevron-right"></i> Tutoriales</a></li>
                         <li><a href="#herramientas"><i class="fas fa-chevron-right"></i> Herramientas</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Documentación</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
