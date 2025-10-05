@@ -329,9 +329,21 @@
             gap: 40px;
         }
 
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            width: 100%;
+        }
+
+        .video-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
         .video-container {
             width: 100%;
-            max-width: 900px;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow);
@@ -340,18 +352,24 @@
 
         .video-container iframe {
             width: 100%;
-            height: 500px;
+            height: 300px;
             border: none;
             display: block;
         }
 
+        .video-container video {
+            width: 100%;
+            height: 300px;
+            display: block;
+            object-fit: cover;
+        }
+
         .video-info {
             text-align: center;
-            max-width: 800px;
         }
 
         .video-info h3 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-bottom: 15px;
             color: var(--dark);
         }
@@ -539,8 +557,13 @@
                 font-size: 2rem;
             }
             
-            .video-container iframe {
-                height: 400px;
+            .videos-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-container iframe,
+            .video-container video {
+                height: 350px;
             }
         }
 
@@ -580,7 +603,12 @@
                 grid-template-columns: 1fr;
             }
             
-            .video-container iframe {
+            .videos-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-container iframe,
+            .video-container video {
                 height: 250px;
             }
         }
@@ -752,12 +780,35 @@
                 <p>Aprende a utilizar herramientas de análisis espacial para el desarrollo urbano sostenible.</p>
             </div>
             <div class="tutorial-content">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/LtJJAay7Fvs" title="Genera Mapas Web Interactivos con QGIS 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="videos-container">
+                    <!-- Video de YouTube -->
+                    <div class="video-wrapper">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/LtJJAay7Fvs" title="Genera Mapas Web Interactivos con QGIS 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3>Genera Mapas Web Interactivos con QGIS 3</h3>
+                            <p>Aprende a crear mapas web interactivos utilizando QGIS 3, una de las herramientas más poderosas para el análisis espacial y la visualización de datos urbanos.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Video MP4 Local -->
+                    <div class="video-wrapper">
+                        <div class="video-container">
+                            <video controls poster="https://pixabay.com/get/g731a33a37d68120d2fd838b5cba0b2dda97ecb61d8afeaa134d114d9776a3f55f02ab3d96c2e1d2325986084dc073af50d299aa895e10848d7ba067d7c26854ba482d452784ac79e97b32f850defe2e2_1280.jpg">
+                                <source src="tutorial-urbandata.mp4" type="video/mp4">
+                                <source src="tutorial-urbandata.ogg" type="video/ogg">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                        </div>
+                        <div class="video-info">
+                            <h3>Ventajas de usar QGis con capas.</h3>
+                            <p>Una demostracion aplicada a Maldonado, Laguna del diario, Uruguay.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="video-info">
-                    <h3>Genera Mapas Web Interactivos con QGIS 3</h3>
-                    <p>Aprende a crear mapas web interactivos utilizando QGIS 3, una de las herramientas más poderosas para el análisis espacial y la visualización de datos urbanos. Este tutorial te guiará paso a paso en la creación de visualizaciones atractivas y funcionales para tus proyectos de planificación urbana.</p>
+                
+                <div class="video-info" style="margin-top: 30px;">
                     <a href="https://www.youtube.com/channel/UC8O2HzY0oRfEC8RlDkQ6JYg" target="_blank" class="btn">
                         <i class="fab fa-youtube"></i> Más Tutoriales
                     </a>
